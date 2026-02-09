@@ -9,6 +9,8 @@ const config: Config = {
   tagline: 'Centro de Documentación Técnica',
   favicon: 'img/favicon.ico',
 
+  // Configuración de Azure AD se encuentra en src/auth/msalConfig.ts
+
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
