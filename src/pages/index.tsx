@@ -8,20 +8,28 @@ import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
+const quickLinks = [
+  {emoji: '📖', label: 'Introducción', to: '/docs/intro'},
+  {emoji: '📘', label: 'Guías de Desarrollo', to: '/docs/category/guías-de-desarrollo'},
+  {emoji: '⚛️', label: 'Frontend', to: '/docs/category/frontend'},
+  {emoji: '🏗️', label: 'Arquitectura', to: '/docs/category/arquitectura'},
+  {emoji: '🔐', label: 'Infraestructura', to: '/docs/category/infraestructura'},
+  {emoji: '📝', label: 'Blog', to: '/blog'},
+];
+
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={styles.heroBanner}>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+        <Heading as="h1" className={styles.heroTitle}>
+          Centro de Documentación Técnica
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className={styles.heroSubtitle}>
+          Guías, estándares y recursos técnicos para los equipos de desarrollo de Banco Pichincha.
+        </p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+          <Link className={styles.ctaButton} to="/docs/intro">
+            Explorar Documentación
           </Link>
         </div>
       </div>
@@ -29,15 +37,35 @@ function HomepageHeader() {
   );
 }
 
+function QuickLinks() {
+  return (
+    <section className={styles.quickLinks}>
+      <div className="container">
+        <Heading as="h2" className={styles.quickLinksTitle}>
+          Accesos Rápidos
+        </Heading>
+        <div className={styles.quickLinksGrid}>
+          {quickLinks.map(({emoji, label, to}) => (
+            <Link key={label} className={styles.quickLinkCard} to={to}>
+              <span className={styles.quickLinkEmoji}>{emoji}</span>
+              <span className={styles.quickLinkLabel}>{label}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title="Centro de Documentación"
+      description="Documentación técnica para los equipos de desarrollo de Banco Pichincha">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <QuickLinks />
       </main>
     </Layout>
   );

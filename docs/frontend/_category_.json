@@ -1,0 +1,8 @@
+{
+  "label": "Frontend",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Documentación de frameworks y tecnologías frontend utilizadas en los proyectos."
+  }
+}

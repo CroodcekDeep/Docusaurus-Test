@@ -1,0 +1,8 @@
+{
+  "label": "Infraestructura",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Guías de despliegue, configuración de entornos y servicios cloud en Azure."
+  }
+}

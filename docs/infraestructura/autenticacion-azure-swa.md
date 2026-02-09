@@ -1,6 +1,15 @@
-# Autenticacion con Azure
+---
+sidebar_position: 1
+---
 
-Esta guia explica como agregar autenticacion con cuentas de Microsoft/Azure DevOps a un sitio Docusaurus desplegado en Azure Static Web Apps, y como restringir el acceso a un dominio corporativo (ej. `@pichincha.com`).
+# Autenticación con Azure Static Web Apps
+
+| Acción | Autor | Fecha |
+|--------|-------|-------|
+| Creado | Equipo de Arquitectura | 2026-02-09 |
+| Modificado | Equipo de Arquitectura | 2026-02-09 |
+
+Esta guía explica cómo agregar autenticación con cuentas de Microsoft/Azure DevOps a un sitio Docusaurus desplegado en Azure Static Web Apps, y cómo restringir el acceso a un dominio corporativo (ej. `@pichincha.com`).
 
 ---
 
@@ -14,7 +23,7 @@ Esta guia explica como agregar autenticacion con cuentas de Microsoft/Azure DevO
 
 ## Paso 1: Archivo base `staticwebapp.config.json`
 
-Este archivo se coloca en la carpeta `static/` del proyecto Docusaurus. Con esta configuracion basica, **cualquier cuenta Microsoft puede iniciar sesion**:
+Este archivo se coloca en la carpeta `static/` del proyecto Docusaurus. Con esta configuración básica, **cualquier cuenta Microsoft puede iniciar sesión**:
 
 ```json
 {
@@ -49,12 +58,12 @@ Este archivo se coloca en la carpeta `static/` del proyecto Docusaurus. Con esta
 }
 ```
 
-### Que hace cada seccion
+### Qué hace cada sección
 
-| Seccion | Descripcion |
+| Sección | Descripción |
 |---------|-------------|
-| `routes` | Define que rutas requieren autenticacion (`authenticated`) y cuales son publicas (`anonymous`) |
-| `responseOverrides` | Cuando un usuario no esta autenticado (401), lo redirige al login de Azure AD |
+| `routes` | Define qué rutas requieren autenticación (`authenticated`) y cuáles son públicas (`anonymous`) |
+| `responseOverrides` | Cuando un usuario no está autenticado (401), lo redirige al login de Azure AD |
 | `navigationFallback` | Permite que las rutas de Docusaurus (SPA) funcionen correctamente |
 | `globalHeaders` | Headers de seguridad para proteger contra clickjacking y MIME sniffing |
 
@@ -64,7 +73,7 @@ Este archivo se coloca en la carpeta `static/` del proyecto Docusaurus. Con esta
 
 Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita agregar el bloque `auth` y bloquear otros proveedores de login.
 
-### Configuracion completa con restriccion de dominio
+### Configuración completa con restricción de dominio
 
 ```json
 {
@@ -118,7 +127,7 @@ Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita ag
 }
 ```
 
-### Que se agrego y por que
+### Qué se agregó y por qué
 
 #### Bloque `auth.identityProviders.azureActiveDirectory`
 
@@ -136,11 +145,13 @@ Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita ag
 }
 ```
 
-- **`openIdIssuer`**: Vincula la autenticacion al tenant especifico de tu organizacion. Reemplazar `TU_TENANT_ID` con el ID real del tenant (lo encuentras en Azure Portal > Entra ID > Overview).
+- **`openIdIssuer`**: Vincula la autenticación al tenant específico de tu organización. Reemplazar `TU_TENANT_ID` con el ID real del tenant (lo encuentras en Azure Portal > Entra ID > Overview).
 - **`clientIdSettingName`**: Nombre de la variable de entorno donde se almacena el Client ID de la App Registration.
 - **`clientSecretSettingName`**: Nombre de la variable de entorno donde se almacena el Client Secret.
 
-> Sin este bloque, Azure SWA usa un proveedor generico de Microsoft que acepta **cualquier cuenta**, incluyendo cuentas personales (@hotmail.com, @outlook.com).
+:::warning
+Sin este bloque, Azure SWA usa un proveedor genérico de Microsoft que acepta **cualquier cuenta**, incluyendo cuentas personales (@hotmail.com, @outlook.com).
+:::
 
 #### Bloqueo de otros proveedores
 
@@ -156,11 +167,11 @@ Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita ag
 ```
 
 - Deshabilita los proveedores de login de GitHub y Twitter devolviendo un error 404.
-- Esto asegura que **Azure AD sea la unica forma de autenticarse**.
+- Esto asegura que **Azure AD sea la única forma de autenticarse**.
 
 ---
 
-## Paso 3: Configuracion en Azure Portal
+## Paso 3: Configuración en Azure Portal
 
 ### 3.1 Crear App Registration
 
@@ -169,7 +180,7 @@ Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita ag
 3. Configurar:
    - **Name**: `Docusaurus Docs` (o el nombre que prefieras)
    - **Supported account types**: Seleccionar **"Accounts in this organizational directory only (Single tenant)"**
-     - **Esta es la opcion clave** que restringe el acceso al dominio `@pichincha.com`
+     - **Esta es la opción clave** que restringe el acceso al dominio `@pichincha.com`
    - **Redirect URI**: Tipo `Web`, valor: `https://TU_SITIO.azurestaticapps.net/.auth/login/aad/callback`
 4. Click en **Register**
 5. Copiar el **Application (client) ID** y el **Directory (tenant) ID**
@@ -178,8 +189,8 @@ Para que **solo cuentas del dominio corporativo** puedan acceder, se necesita ag
 
 1. En la App Registration creada, ir a **Certificates & secrets**
 2. Click en **New client secret**
-3. Agregar una descripcion y seleccionar la expiracion
-4. **Copiar el valor del secret inmediatamente** (no se puede ver despues)
+3. Agregar una descripción y seleccionar la expiración
+4. **Copiar el valor del secret inmediatamente** (no se puede ver después)
 
 ### 3.3 Configurar variables en Azure Static Web App
 
@@ -200,54 +211,54 @@ Reemplazar `TU_TENANT_ID` en el archivo con el **Directory (tenant) ID** copiado
 
 ---
 
-## Resumen: Diferencias entre configuracion basica y restringida
+## Resumen: Diferencias entre configuración básica y restringida
 
-| Aspecto | Basica | Restringida a @pichincha.com |
+| Aspecto | Básica | Restringida a @pichincha.com |
 |---------|--------|------------------------------|
 | Bloque `auth` | No necesario | Requerido con Tenant ID, Client ID y Secret |
 | Proveedores de login | GitHub, Twitter y AAD disponibles | Solo Azure AD (otros bloqueados con 404) |
 | App Registration | No necesaria | Requerida en modo Single Tenant |
 | Variables de entorno | No necesarias | `AAD_CLIENT_ID` y `AAD_CLIENT_SECRET` |
-| Quien puede acceder | Cualquier cuenta Microsoft | Solo cuentas `@pichincha.com` |
+| Quién puede acceder | Cualquier cuenta Microsoft | Solo cuentas `@pichincha.com` |
 
 ---
 
-## Flujo de autenticacion
+## Flujo de autenticación
 
 ```
 Usuario visita el sitio
-        |
-        v
-  ¿Esta autenticado? ── Si ──> Accede al contenido
-        |
+        │
+        ▼
+  ¿Está autenticado? ── Sí ──► Accede al contenido
+        │
        No
-        |
-        v
+        │
+        ▼
   Redirige a /.auth/login/aad
-        |
-        v
+        │
+        ▼
   Login con cuenta Microsoft
-        |
-        v
-  ¿Cuenta es @pichincha.com? ── No ──> Error: acceso denegado
-        |
-       Si
-        |
-        v
-  Regresa al sitio con sesion activa
+        │
+        ▼
+  ¿Cuenta es @pichincha.com? ── No ──► Error: acceso denegado
+        │
+       Sí
+        │
+        ▼
+  Regresa al sitio con sesión activa
 ```
 
 ---
 
-## Endpoints utiles de Azure SWA
+## Endpoints útiles de Azure SWA
 
-Una vez configurada la autenticacion, estos endpoints estan disponibles automaticamente:
+Una vez configurada la autenticación, estos endpoints están disponibles automáticamente:
 
-| Endpoint | Descripcion |
+| Endpoint | Descripción |
 |----------|-------------|
 | `/.auth/login/aad` | Inicia el flujo de login con Azure AD |
-| `/.auth/logout` | Cierra la sesion del usuario |
-| `/.auth/me` | Devuelve informacion del usuario autenticado (JSON) |
+| `/.auth/logout` | Cierra la sesión del usuario |
+| `/.auth/me` | Devuelve información del usuario autenticado (JSON) |
 
 ### Ejemplo de respuesta de `/.auth/me`
 

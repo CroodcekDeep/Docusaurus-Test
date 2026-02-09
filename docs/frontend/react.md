@@ -1,4 +1,13 @@
-# ⚛️ React
+---
+sidebar_position: 1
+---
+
+# React
+
+| Acción | Autor | Fecha |
+|--------|-------|-------|
+| Creado | Equipo de Arquitectura | 2026-02-09 |
+| Modificado | Equipo de Arquitectura | 2026-02-09 |
 
 ## Descripción
 
@@ -28,7 +37,7 @@ Ejemplos de uso común:
 
 ## Características principales
 
-### 🔹 Arquitectura basada en componentes
+### Arquitectura basada en componentes
 
 La interfaz se divide en **componentes independientes**, cada uno con su propia lógica y presentación.
 
@@ -40,7 +49,7 @@ Ventajas:
 
 ---
 
-### 🔹 JSX
+### JSX
 
 JSX es una extensión de JavaScript que permite escribir HTML dentro del código JS.
 
@@ -52,7 +61,7 @@ Esto mejora la legibilidad y la relación directa entre lógica y vista.
 
 ---
 
-### 🔹 Estado y Hooks
+### Estado y Hooks
 
 React maneja el estado mediante **Hooks**, introducidos a partir de React 16.8.
 
@@ -65,7 +74,7 @@ Hooks más comunes:
 
 ---
 
-### 🔹 Virtual DOM
+### Virtual DOM
 
 React usa un **DOM virtual**, que:
 
@@ -143,23 +152,22 @@ Equivalente a:
 
 ## Casos donde React es una buena elección
 
-✅ Aplicaciones medianas y grandes
-✅ Proyectos con crecimiento a largo plazo
-✅ Interfaces altamente interactivas
-
-❌ Sitios estáticos simples
-❌ Proyectos muy pequeños sin interacción
+| Recomendado | No recomendado |
+|-------------|----------------|
+| Aplicaciones medianas y grandes | Sitios estáticos simples |
+| Proyectos con crecimiento a largo plazo | Proyectos muy pequeños sin interacción |
+| Interfaces altamente interactivas | Landing pages básicas |
 
 ---
 
-## Relación con otras herramientas
+## Herramientas complementarias
 
-React suele usarse junto con:
-
-* **React Router** → navegación
-* **Redux / Zustand** → estado global
-* **Vite / Webpack** → bundling
-* **Next.js** → SSR y SEO
+| Herramienta | Propósito |
+|-------------|-----------|
+| **React Router** | Navegación |
+| **Redux / Zustand** | Estado global |
+| **Vite / Webpack** | Bundling |
+| **Next.js** | SSR y SEO |
 
 ---
 
