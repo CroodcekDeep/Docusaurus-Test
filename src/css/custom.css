@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+
 /**
  * Custom CSS for Banco Pichincha Documentation Site
  * Paleta: Amarillo Pichincha + Azul oscuro corporativo
@@ -12,7 +14,8 @@
   --ifm-color-primary-lighter: #E6BA00;
   --ifm-color-primary-lightest: #FFD100;
   --ifm-code-font-size: 95%;
-  --ifm-font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-base: 'Source Sans 3', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Space Grotesk', 'Source Sans 3', system-ui, -apple-system, sans-serif;
   --ifm-heading-font-weight: 700;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --pichincha-yellow: #FFD100;
