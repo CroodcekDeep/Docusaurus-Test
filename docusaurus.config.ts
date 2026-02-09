@@ -96,14 +96,20 @@ const config: Config = {
       title: 'Banco Pichincha',
       logo: {
         alt: 'Banco Pichincha Logo',
-        src: 'img/logo.svg',
+        src: 'img/LogoPichincha.png',
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
+          type: 'dropdown',
           label: 'Documentación',
+          position: 'left',
+          items: [
+            {to: '/docs/intro', label: 'Introducción'},
+            {to: '/docs/category/guías-de-desarrollo', label: 'Guías de Desarrollo'},
+            {to: '/docs/category/frontend', label: 'Frontend'},
+            {to: '/docs/category/arquitectura', label: 'Arquitectura'},
+            {to: '/docs/category/infraestructura', label: 'Infraestructura'},
+          ],
         },
         {to: '/blog', label: 'Blog', position: 'left'},
       ],
