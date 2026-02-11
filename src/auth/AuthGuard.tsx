@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from './useAuth';
 
 interface AuthGuardProps {
@@ -12,7 +12,7 @@ interface AuthGuardProps {
  *
  * @param children - Contenido a renderizar cuando está autenticado
  * @param fallback - Contenido opcional mientras carga o no autenticado
- * @param requireAuth - Si es true, redirige automáticamente al login (default: true)
+ * @param requireAuth - Si es true, muestra pantalla de login (default: true)
  */
 export const AuthGuard: React.FC<AuthGuardProps> = ({
   children,
@@ -20,13 +20,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
   requireAuth = true
 }) => {
   const { isAuthenticated, isLoading, login } = useAuth();
-
-  useEffect(() => {
-    // Si requiere auth y no está autenticado ni cargando, iniciar login
-    if (requireAuth && !isAuthenticated && !isLoading) {
-      login();
-    }
-  }, [requireAuth, isAuthenticated, isLoading, login]);
+  const [guestMode, setGuestMode] = useState(false);
 
   // Mostrar loading mientras se inicializa o durante el proceso de auth
   if (isLoading) {
@@ -38,20 +32,40 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
     );
   }
 
+  // Si está en modo invitado, renderizar contenido directamente
+  if (guestMode) {
+    return <>{children}</>;
+  }
+
   // Si no está autenticado
   if (!isAuthenticated) {
     if (fallback) {
       return <>{fallback}</>;
     }
 
-    // Mostrar pantalla de login mientras se redirige
+    // Mostrar pantalla de login con dos opciones
     return (
       <div className="auth-login-screen">
         <div className="auth-login-screen__content">
           <h1>Banco Pichincha</h1>
           <h2>Centro de Documentación Técnica</h2>
-          <p>Iniciando sesión con Microsoft...</p>
-          <div className="auth-loading__spinner" />
+          <div className="auth-login-screen__buttons">
+            <button
+              className="auth-login-screen__btn-azure"
+              onClick={() => login()}
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M11.4 2L0 9.2l4.1 7.2L11.4 15V2zm1.2 0v13l11.4 7.2L12.6 2zM0 17.8L11.4 22v-5.8L4.1 17.8H0zm12.6-1.6V22l11.4-4.2h-4.1l-7.3 1.6z" />
+              </svg>
+              Iniciar sesión con Microsoft
+            </button>
+            <button
+              className="auth-login-screen__btn-guest"
+              onClick={() => setGuestMode(true)}
+            >
+              Entrar como Invitado
+            </button>
+          </div>
         </div>
       </div>
     );

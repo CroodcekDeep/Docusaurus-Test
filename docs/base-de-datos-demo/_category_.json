@@ -1,0 +1,9 @@
+{
+  "label": "Base de Datos (Demo)",
+  "position": 6,
+  "description": "Documentación generada dinámicamente desde una base de datos simulada",
+  "link": {
+    "type": "generated-index",
+    "description": "Documentación generada dinámicamente desde una base de datos simulada"
+  }
+}

@@ -12,7 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "api": "node api/server.js",
+    "dev": "concurrently \"npm run api\" \"npm run start\""
   },
   "dependencies": {
     "@azure/msal-browser": "^5.1.0",
@@ -21,7 +23,11 @@
     "@docusaurus/preset-classic": "3.9.2",
     "@easyops-cn/docusaurus-search-local": "^0.54.0",
     "@mdx-js/react": "^3.0.0",
+    "better-sqlite3": "^11.0.0",
     "clsx": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "marked": "^17.0.1",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -30,6 +36,7 @@
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "concurrently": "^9.0.0",
     "typescript": "~5.6.2"
   },
   "browserslist": {

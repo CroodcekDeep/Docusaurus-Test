@@ -3,7 +3,7 @@ import { useAuth } from '@site/src/auth';
 import styles from './styles.module.css';
 
 export const UserMenu: React.FC = () => {
-  const { isAuthenticated, isLoading, user, logout } = useAuth();
+  const { isAuthenticated, isLoading, user, login, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -39,8 +39,55 @@ export const UserMenu: React.FC = () => {
     );
   }
 
+  // Modo invitado: mostrar avatar "IN" con opción de iniciar sesión
   if (!isAuthenticated || !user) {
-    return null;
+    return (
+      <div className={styles.userMenuContainer} ref={menuRef}>
+        <button
+          className={styles.avatarButton}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          aria-label="Menú de usuario: Invitado"
+        >
+          <span className={styles.avatar}>IN</span>
+        </button>
+
+        {isOpen && (
+          <div className={styles.dropdown} role="menu">
+            <div className={styles.userInfo}>
+              <span className={styles.avatarLarge}>IN</span>
+              <div className={styles.userDetails}>
+                <span className={styles.userName}>Invitado</span>
+                <span className={styles.userEmail}>Sin autenticación</span>
+              </div>
+            </div>
+            <div className={styles.divider} />
+            <button
+              className={styles.logoutButton}
+              onClick={() => {
+                setIsOpen(false);
+                login();
+              }}
+              role="menuitem"
+            >
+              <svg
+                className={styles.logoutIcon}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
+              </svg>
+              Iniciar Sesión
+            </button>
+          </div>
+        )}
+      </div>
+    );
   }
 
   const initials = user.name

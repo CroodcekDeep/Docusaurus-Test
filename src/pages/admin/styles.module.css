@@ -1,0 +1,142 @@
+.container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.subtitle {
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Alerts */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.alertError {
+  composes: alert;
+  background: var(--ifm-color-danger-contrast-background);
+  border: 1px solid var(--ifm-color-danger-dark);
+  color: var(--ifm-color-danger-darkest);
+}
+
+.alertSuccess {
+  composes: alert;
+  background: var(--ifm-color-success-contrast-background);
+  border: 1px solid var(--ifm-color-success-dark);
+  color: var(--ifm-color-success-darkest);
+}
+
+/* Form card */
+.formCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fieldFull {
+  composes: field;
+  margin-bottom: 1rem;
+}
+
+.input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.textarea {
+  composes: input;
+  font-family: monospace;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnPrimary {
+  composes: btn;
+  padding: 0.6rem 1.25rem;
+  background: var(--ifm-color-primary);
+  color: #1b2a4a;
+  font-size: 0.95rem;
+}
+
+.btnSecondary {
+  composes: btn;
+  padding: 0.6rem 1.25rem;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+  font-size: 0.95rem;
+}
+
+.btnSmall {
+  composes: btn;
+  padding: 0.3rem 0.6rem;
+  background: var(--ifm-color-primary);
+  color: #1b2a4a;
+  font-size: 0.8rem;
+}
+
+.btnDanger {
+  composes: btnSmall;
+  background: var(--ifm-color-danger);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead tr {
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+}
+
+.table tbody tr {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.table th {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+}
+
+.table td {
+  padding: 0.75rem 0.5rem;
+}
+
+.slugCell {
+  font-family: monospace;
+  font-size: 0.85rem;
+}

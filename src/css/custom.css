@@ -175,3 +175,57 @@ a:hover {
   border-color: rgba(255, 255, 255, 0.2);
   border-top-color: var(--pichincha-yellow);
 }
+
+/* Login screen buttons */
+.auth-login-screen__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.auth-login-screen__btn-azure {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 2rem;
+  background: var(--pichincha-yellow);
+  color: var(--pichincha-dark);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  font-family: var(--ifm-font-family-base);
+}
+
+.auth-login-screen__btn-azure:hover {
+  background: #e6bc00;
+  transform: translateY(-1px);
+}
+
+.auth-login-screen__btn-azure:active {
+  transform: translateY(0);
+}
+
+.auth-login-screen__btn-guest {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  font-family: var(--ifm-font-family-base);
+}
+
+.auth-login-screen__btn-guest:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
