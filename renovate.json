@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Configuración GitHub: Ramas con prefijo feature/ y agrupamiento por severidad de seguridad",
+  "description": "Configuración GitHub: Ramas con prefijo feature/ y agrupamiento por severidad de seguridad.",
   "extends": [
     "config:recommended",
     ":separateMajorReleases",
