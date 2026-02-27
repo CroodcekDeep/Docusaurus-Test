@@ -1,32 +1,48 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "Configuración para GitHub personal: reduce ruido y organiza actualizaciones por importancia",
+  "description": "Configuración GitHub: Ramas con prefijo feature/ y agrupamiento por severidad de seguridad",
   "extends": [
     "config:recommended",
     ":separateMajorReleases",
     ":combinePatchMinorReleases",
     ":timezone(America/Guayaquil)"
   ],
+  "branchPrefix": "feature/conf-vulnerabilidades/",
   "dependencyDashboard": true,
   "labels": ["dependencies", "github-action", "renovate"],
   "packageRules": [
     {
-      "description": "Agrupa actualizaciones menores y parches en un solo PR para no saturar la pestaña de Pull Requests",
+      "description": "Agrupa actualizaciones minor/patch normales (NO de seguridad) en una sola rama",
       "matchUpdateTypes": ["minor", "patch"],
+      "matchIsSecurity": false,
       "groupName": "all non-major dependencies",
       "groupSlug": "minor-patch-combined"
     },
     {
-      "description": "Añade una etiqueta de seguridad específica si la actualización es un parche de seguridad",
-      "matchUpdateTypes": ["patch"],
-      "matchCurrentVersion": "/^0/",
-      "addLabels": ["security-update"]
+      "description": "Rama específica para vulnerabilidades CRÍTICAS",
+      "matchIsSecurity": true,
+      "matchSeverity": ["critical"],
+      "groupName": "critical security fixes",
+      "groupSlug": "severity-critical"
+    },
+    {
+      "description": "Rama específica para vulnerabilidades de severidad ALTA",
+      "matchIsSecurity": true,
+      "matchSeverity": ["high"],
+      "groupName": "high security fixes",
+      "groupSlug": "severity-high"
+    },
+    {
+      "description": "Rama para vulnerabilidades de severidad MEDIA o BAJA",
+      "matchIsSecurity": true,
+      "matchSeverity": ["medium", "low"],
+      "groupName": "moderate security fixes",
+      "groupSlug": "severity-moderate"
     }
   ],
   "vulnerabilityAlerts": {
-    "description": "Habilita alertas proactivas para vulnerabilidades conocidas",
-    "labels": ["security"],
-    "enabled": true
+    "enabled": true,
+    "addLabels": ["security"]
   },
   "prHourlyLimit": 0,
   "prConcurrentLimit": 5,
